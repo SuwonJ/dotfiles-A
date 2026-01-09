@@ -1,0 +1,94 @@
+{
+    "style": "./waybar_style.css",
+    "layer": "top",
+    "position": "top",
+    "height": 35,
+    "spacing": 2,
+
+    "modules-left": ["hyprland/workspaces", "custom/dayleft", "custom/dday"],
+    "modules-center": ["clock"],
+    "modules-right": ["network", "custom/separator", "pulseaudio", "custom/separator", "custom/polycat", "cpu", "custom/separator", "memory", "custom/separator", "battery", "tray"],
+
+    "hyprland/workspaces": {
+        "format": "{icon}",
+        "format-icons": {
+            "default": "",
+            "active": ""
+        },
+        "disable-click": true,
+        "persistent-workspaces": {
+            "1": [],
+            "2": [],
+            "3": [],
+            "4": [],
+            "5": [],
+            "6": [],
+            "7": [],
+            "8": [],
+            "9": [],
+            "10": []
+        }
+    },
+
+    "custom/dayleft": {
+        "format": "{}",
+        "interval": 5,
+        "exec": "now=$(date +%s); start=$(date -d \"$(date +%Y-%m-%d) 08:00:00\" +%s); end=$(date -d \"$(date +%Y-%m-%d) 23:59:59\" +%s); total=$((end - start)); left=$((end - now)); if (( now <= start )); then percent=100; elif (( now > end )); then percent=0; else percent=$(awk -v total=$total -v left=$left 'BEGIN {print (left/total)*100}'); fi; printf \"DayLeft: %.2f%%\n\" \"$percent\""
+    },
+
+    "custom/dday": {
+        "format": "{}",
+        "interval": 60,
+        "exec": "echo -n \"D-$(echo $(( ( $(date -d '2025-10-15' +%s) - $(date -d 'today' +%s)) / 86400 +1)))\""
+    },
+
+    "battery": {
+        "format": "<span color='#7d9e55'>BAT</span> {capacity}% ({time})",
+        "format-charging": "<span color='#f48fb1'>BAT</span> {capacity}%+ ({time})",
+        "format-full": "<span color='#7d9e55'>BAT</span> {capacity}%"
+    },
+
+    "clock": {
+        "format": "{:%a %b %d • %H:%M}",
+        "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>"
+    },
+
+    "network": {
+        "interface": "wlan0",
+        "format-wifi": "{bandwidthDown}KB/s ↓ {bandwidthUp}KB/s ↑",
+        "format-ethernet": "{ipaddr}/{cidr} ",
+        "format-disconnected": "Offline"
+    },
+
+    "pulseaudio": {
+        "format": "<span color='#7d9e55'>VOL</span> {volume}%",
+        "format-muted": "<span color='#7d9e55'>MUTE</span> 0%",
+        "on-click": "pavucontrol"
+    },
+
+    "cpu": {
+        "format": "{usage}%"
+    },
+
+    "memory": {
+        "format": "{used}G"
+    },
+
+    "custom/separator": {
+        "format": "|"
+    },
+
+    "custom/polycat": {
+    "exec": "/usr/bin/polycat",
+    "interval": 0,
+    "tail": "true"
+    },
+
+    "tray": {
+        "icon-size": 18,
+        "spacing": 8
+    }
+}
+
+
+

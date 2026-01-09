@@ -1,0 +1,106 @@
+[2025-08-08 19:17:11.729] [debug] Try expanding: $XDG_CONFIG_HOME/waybar/config
+[2025-08-08 19:17:11.729] [debug] Try expanding: $XDG_CONFIG_HOME/waybar/config.jsonc
+[2025-08-08 19:17:11.729] [debug] Try expanding: $HOME/.config/waybar/config
+[2025-08-08 19:17:11.729] [debug] Try expanding: $HOME/.config/waybar/config.jsonc
+[2025-08-08 19:17:11.729] [debug] Try expanding: $HOME/waybar/config
+[2025-08-08 19:17:11.729] [debug] Try expanding: $HOME/waybar/config.jsonc
+[2025-08-08 19:17:11.729] [debug] Try expanding: /etc/xdg/waybar/config
+[2025-08-08 19:17:11.729] [debug] Try expanding: /etc/xdg/waybar/config.jsonc
+[2025-08-08 19:17:11.729] [debug] Found config file: /etc/xdg/waybar/config.jsonc
+[2025-08-08 19:17:11.729] [info] Using configuration file /etc/xdg/waybar/config.jsonc
+[2025-08-08 19:17:11.733] [info] Discovered appearance 'dark'
+[2025-08-08 19:17:11.733] [debug] Try expanding: $XDG_CONFIG_HOME/waybar/style-dark.css
+[2025-08-08 19:17:11.733] [debug] Try expanding: $XDG_CONFIG_HOME/waybar/style.css
+[2025-08-08 19:17:11.733] [debug] Try expanding: $HOME/.config/waybar/style-dark.css
+[2025-08-08 19:17:11.733] [debug] Try expanding: $HOME/.config/waybar/style.css
+[2025-08-08 19:17:11.733] [debug] Try expanding: $HOME/waybar/style-dark.css
+[2025-08-08 19:17:11.733] [debug] Try expanding: $HOME/waybar/style.css
+[2025-08-08 19:17:11.733] [debug] Try expanding: /etc/xdg/waybar/style-dark.css
+[2025-08-08 19:17:11.733] [debug] Try expanding: /etc/xdg/waybar/style.css
+[2025-08-08 19:17:11.733] [debug] Found config file: /etc/xdg/waybar/style.css
+[2025-08-08 19:17:11.733] [info] Using CSS file /etc/xdg/waybar/style.css
+[2025-08-08 19:17:11.741] [debug] Output detection done: eDP-1 (LG Display 0x0645 )
+[2025-08-08 19:17:11.746] [warning] module sway/workspaces: Disabling module "sway/workspaces", Socket path is empty
+[2025-08-08 19:17:11.749] [warning] module sway/mode: Disabling module "sway/mode", Socket path is empty
+[2025-08-08 19:17:11.752] [warning] module sway/scratchpad: Disabling module "sway/scratchpad", Socket path is empty
+[2025-08-08 19:17:11.756] [warning] 'swap-icon-label' must be a bool.
+[2025-08-08 19:17:11.758] [debug] Cmd exited with code 127
+[2025-08-08 19:17:11.758] [error] media stopped unexpectedly, is it endless?
+[2025-08-08 19:17:11.759] [warning] module sway/window: Disabling module "sway/window", Socket path is empty
+[2025-08-08 19:17:11.759] [debug] mpd: Disconnected: enabled 1s interval timer.
+[2025-08-08 19:17:11.761] [debug] network: new default route via 192.168.0.1 on if2 metric 600
+[2025-08-08 19:17:11.761] [debug] network: wlan0, new addr 192.168.0.3/24
+[2025-08-08 19:17:11.761] [debug] network: wlan0, new addr 192.168.0.3/24
+[2025-08-08 19:17:11.766] [warning] Can't open /dev/input/event14 (are you in the input group?): EACCES Permission denied
+[2025-08-08 19:17:11.766] [warning] Can't open /dev/input/event13 (are you in the input group?): EACCES Permission denied
+[2025-08-08 19:17:11.766] [warning] Can't open /dev/input/event12 (are you in the input group?): EACCES Permission denied
+[2025-08-08 19:17:11.766] [warning] Can't open /dev/input/event11 (are you in the input group?): EACCES Permission denied
+[2025-08-08 19:17:11.766] [warning] Can't open /dev/input/event10 (are you in the input group?): EACCES Permission denied
+[2025-08-08 19:17:11.766] [warning] Can't open /dev/input/mouse0 (are you in the input group?): EACCES Permission denied
+[2025-08-08 19:17:11.766] [warning] Can't open /dev/input/mice (are you in the input group?): EACCES Permission denied
+[2025-08-08 19:17:11.766] [warning] Can't open /dev/input/event9 (are you in the input group?): EACCES Permission denied
+[2025-08-08 19:17:11.766] [warning] Can't open /dev/input/event8 (are you in the input group?): EACCES Permission denied
+[2025-08-08 19:17:11.766] [warning] Can't open /dev/input/event7 (are you in the input group?): EACCES Permission denied
+[2025-08-08 19:17:11.766] [warning] Can't open /dev/input/event6 (are you in the input group?): EACCES Permission denied
+[2025-08-08 19:17:11.766] [warning] Can't open /dev/input/event5 (are you in the input group?): EACCES Permission denied
+[2025-08-08 19:17:11.766] [warning] Can't open /dev/input/event4 (are you in the input group?): EACCES Permission denied
+[2025-08-08 19:17:11.766] [warning] Can't open /dev/input/event3 (are you in the input group?): EACCES Permission denied
+[2025-08-08 19:17:11.766] [warning] Can't open /dev/input/event2 (are you in the input group?): EACCES Permission denied
+[2025-08-08 19:17:11.766] [warning] Can't open /dev/input/event1 (are you in the input group?): EACCES Permission denied
+[2025-08-08 19:17:11.766] [warning] Can't open /dev/input/event0 (are you in the input group?): EACCES Permission denied
+[2025-08-08 19:17:11.766] [warning] module keyboard-state: Disabling module "keyboard-state", Failed to find keyboard device: EACCES Permission denied
+[2025-08-08 19:17:11.769] [warning] module sway/language: Disabling module "sway/language", Socket path is empty
+[2025-08-08 19:17:11.770] [warning] No battery named BAT2
+[2025-08-08 19:17:11.771] [debug] Try expanding: $HOME/.config/waybar/power_menu.xml
+[2025-08-08 19:17:11.771] [warning] Error while creating the menu : Failed to expand file: $HOME/.config/waybar/power_menu.xml. Menu popup not activated.
+Fontconfig warning: using without calling FcInit()
+[2025-08-08 19:17:11.796] [debug] GTK widget tree:
+window#waybar.background.top.eDP-1..mode-default:dir(ltr)
+  decoration:dir(ltr)
+  box.horizontal:dir(ltr)
+    box.horizontal.modules-left:dir(ltr)
+      widget:dir(ltr)
+        label#custom-media.module:dir(ltr)
+    box.horizontal.modules-center:dir(ltr)
+    box.horizontal.modules-right:dir(ltr)
+      widget:dir(ltr)
+        label#mpd.module:dir(ltr)
+      widget:dir(ltr)
+        label#idle_inhibitor.module:dir(ltr)
+      widget:dir(ltr)
+        label#pulseaudio.module:dir(ltr)
+      widget:dir(ltr)
+        label#network.module:dir(ltr)
+      widget:dir(ltr)
+        label#power-profiles-daemon.module:dir(ltr)
+      widget:dir(ltr)
+        label#cpu.module:dir(ltr)
+      widget:dir(ltr)
+        label#memory.module:dir(ltr)
+      widget:dir(ltr)
+        label#temperature.module:dir(ltr)
+      widget:dir(ltr)
+        label#backlight.module:dir(ltr)
+      widget:dir(ltr)
+        label#battery.module:dir(ltr)
+      widget:dir(ltr)
+        label#battery.module.bat2:dir(ltr)
+      widget:dir(ltr)
+        label#clock.module:dir(ltr)
+      widget:dir(ltr)
+        box#tray.horizontal.module:dir(ltr)
+      widget:dir(ltr)
+        label#custom-power.module:dir(ltr)
+
+[2025-08-08 19:17:11.796] [debug] Received SIGCHLD in signalThread
+[2025-08-08 19:17:11.796] [debug] Received SIGCHLD in signalThread
+[2025-08-08 19:17:11.796] [debug] Received SIGCHLD in signalThread
+[2025-08-08 19:17:11.796] [debug] Received SIGCHLD in signalThread
+[2025-08-08 19:17:11.796] [debug] Received SIGCHLD in signalThread
+[2025-08-08 19:17:11.796] [debug] Received SIGCHLD in signalThread
+[2025-08-08 19:17:11.904] [error] Failed to query power-profiles-daemon via dbus: GDBus.Error:org.freedesktop.DBus.Error.ServiceUnknown: The name is not activatable
+[2025-08-08 19:17:11.952] [info] Bar configured (width: 1920, height: 30) for output: eDP-1
+[2025-08-08 19:17:12.984] [debug] mpd: Failed to connect to MPD: Connection refused
+[2025-08-08 19:17:12.984] [debug] mpd: Disconnected: disabled interval timer.
+[2025-08-08 19:17:12.984] [debug] mpd: Disconnected: enabled 5s interval timer.
+[2025-08-08 19:17:17.981] [debug] mpd: Failed to connect to MPD: Connection refused

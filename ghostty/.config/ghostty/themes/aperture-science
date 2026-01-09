@@ -1,0 +1,38 @@
+# Aperture Science Theme for Ghostty
+
+# Color Palette (iTerm2-compatible)
+palette = 0="#000000"       # Black
+palette = 1="#A66900"       # Red (Aperture Orange)
+palette = 2="#A66900"       # Green
+palette = 3="#A66900"       # Yellow
+palette = 4="#A66900"       # Blue
+palette = 5="#A66900"       # Magenta
+palette = 6="#A66900"       # Cyan
+palette = 7="#A66900"       # White
+palette = 8="#555555"       # Bright Black
+palette = 9="#FF9900"       # Bright Red (Lighter Orange)
+palette = 10="#FF9900"      # Bright Green
+palette = 11="#FF9900"      # Bright Yellow
+palette = 12="#FF9900"      # Bright Blue
+palette = 13="#FF9900"      # Bright Magenta
+palette = 14="#FF9900"      # Bright Cyan
+palette = 15="#FFFFFF"      # Bright White
+
+# Theme Colors
+background = "#6F3D00"
+foreground = "#A66900"
+cursor-color = "#A66900"
+cursor-text = "#6F3D00"  # Ensure cursor text is readable against cursor color.
+selection-background = "#A66900"
+selection-foreground = "#6F3D00" # Ensure selected text is readable against selection background
+
+# Background Image (Ghostty-specific settings)
+background_image = "Aperture Science-txt-smallened.png"
+background_image_opacity = 0.8
+background_image_align = "bottom-right"
+background_image_stretch = "none"
+
+# Other Settings (Optional)
+#font = "Monospace" # Replace with your desired font
+#font_size = 12
+

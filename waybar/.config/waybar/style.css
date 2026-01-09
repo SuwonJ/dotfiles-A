@@ -1,0 +1,141 @@
+/*
+ * Green-themed Waybar Style
+ */
+
+@define-color background #000000;
+@define-color foreground #D9D9D9;
+@define-color primary #4CAF50; /* A standard bright green */
+@define-color secondary #8BC34A; /* A lighter, more subtle green */
+@define-color alert #FFC107; /* Yellow/Orange for alert, to stand out from green */
+@define-color disabled #616161;
+
+window#waybar {
+    background-color: @background;
+    color: @foreground;
+    font-family: "polycat", "SUITE", "JetBrainsMono Nerd Font", sans-serif;
+    font-size: 16px;
+    font-weight: bold;
+    transition-property: background-color;
+    transition-duration: .5s;
+    border-radius: 0;
+}
+
+
+#workspaces button {
+    background-color: #999999; /* Visible grey for occupied workspaces */
+    font-size: 0; /* Ensures text doesn't affect height */
+    padding: 0px;
+    margin: 13px 4px; /* Vertically centers the 8px dot in 35px bar */
+    min-height: 8px; /* Fixed height for dots */
+    min-width: 8px;  /* Fixed width for dots */
+    border-radius: 50%;           
+    transition: all 0.15s ease;
+}
+
+#workspaces button:hover {
+    min-width: 20px; /* Smaller pill width on hover */
+    min-height: 8px; /* Maintain height */
+    border-radius: 4px; /* Pill shape */
+    background-color: rgba(76, 175, 80, 0.3); /* Using @primary green with transparency */
+}
+#workspaces button.active {
+    min-width: 24px; /* Slightly larger pill when active */
+    min-height: 8px; /* Maintain height */
+    border-radius: 4px; /* Pill shape */
+    background-color: @primary;
+}
+
+#workspaces button.urgent {
+    min-width: 24px; /* Maintain size for urgent */
+    min-height: 8px; /* Maintain height */
+    border-radius: 4px; /* Pill shape */
+    background-color: @alert;
+}
+
+#workspaces button.empty {
+    background-color: rgba(255,255,255,0.2); /* Faint for empty workspaces */
+}
+
+
+
+
+#mode {
+    background-color: @primary;
+    color: @background;
+    border-bottom: 2px solid @primary;
+}
+
+#clock,
+#cpu,
+#memory,
+#pulseaudio,
+#network,
+#tray,
+#custom-dday,
+#custom-dayleft {
+    padding: 0 8px;
+    margin: 0 4px;
+    color: @foreground;
+}
+
+#battery {
+    background-color: transparent;
+    border-radius: 8px;
+    padding: 0 8px;
+    margin: 0 4px;
+    transition: background-color 0.5s ease, background 0.5s ease;
+}
+
+#battery.charging {
+    background-color: transparent;
+    /* REMOVED: animation: flash-green 1.5s ease-in-out infinite alternate; */
+    
+    /* Define the subtle, natural green light gradient */
+    background-image: linear-gradient(
+        to top, 
+        /* Faint green color at the bottom (5% opacity) */
+        rgba(76, 175, 80, 0.05) 20%,   
+        /* Fades out softly over 10% of the bar's height */
+        transparent 50%,             
+        transparent 100%
+    );
+}
+
+#battery.full {
+    background-color: @primary;
+}
+
+#battery.critical:not(.charging) {
+    background-color: @alert;
+    animation-name: blink;
+    animation-duration: 1s;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+    animation-direction: alternate;
+}
+
+@keyframes flash-green {
+    0% { background-color: transparent; }
+    50% { background-color: rgba(76, 175, 80, 0.5); } /* Semi-transparent primary green */
+    100% { background-color: transparent; }
+}
+
+@keyframes blink {
+    to {
+        background-color: transparent;
+    }
+}
+
+#network {
+    color: @foreground;
+}
+#polycat{
+  font-size: 20px;
+}
+#network.disconnected {
+    color: @alert;
+}
+
+#custom-separator {
+    color: @disabled;
+}

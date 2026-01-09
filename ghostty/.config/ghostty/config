@@ -1,0 +1,9 @@
+theme = GitHub Dark
+font-family = "Google Sans Code"
+font-family = "JetBrains Mono"
+font-family = "SF Mono"
+font-family = "Noto Sans Mono CJK KR"
+font-size = 17
+window-decoration = false
+gtk-titlebar = false
+background-opacity = 0.75
