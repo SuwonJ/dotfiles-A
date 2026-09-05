@@ -13,14 +13,18 @@ From the repository root on the target laptop:
 install -Dm644 laptop/home/.bashrc "$HOME/.bashrc"
 install -Dm644 laptop/home/.bash_profile "$HOME/.bash_profile"
 install -Dm644 laptop/home/.xprofile "$HOME/.xprofile"
+install -Dm644 p10k/.p10k.zsh "$HOME/.p10k.zsh"
 mkdir -p "$HOME/.config"
 cp -a laptop/home/.config/. "$HOME/.config/"
 sudo install -Dm644 laptop/system/etc/tlp.d/99-laptop-battery.conf \
   /etc/tlp.d/99-laptop-battery.conf
 sudo install -Dm644 laptop/system/etc/systemd/system/powertop-autotune.service \
   /etc/systemd/system/powertop-autotune.service
+sudo install -Dm644 laptop/system/etc/keyd/default.conf \
+  /etc/keyd/default.conf
 sudo systemctl daemon-reload
 sudo systemctl enable --now tlp.service
+sudo systemctl enable --now keyd.service
 ```
 
 The system files must be copied with `sudo`. Neovim plugins are installed by
@@ -44,6 +48,17 @@ sudo systemctl enable powertop-autotune.service
 No battery charge thresholds were captured because none were explicitly
 configured. No udev, modprobe, or systemd preset files were present for this
 laptop.
+
+The Fcitx5 files preserve the current Korean/English input method layout and
+key bindings. The keyd file makes Caps Lock act as Control while held and
+Caps Lock when tapped. The fontconfig file preserves portable font preferences. The Powerlevel10k configuration is stored as the
+shared `p10k/.p10k.zsh` package because the shared zsh configuration loads
+`~/.p10k.zsh`.
+
+This laptop currently uses Fcitx5, not Nimf. The older Nimf instructions and
+the Hyprland-specific startup examples are historical and should not be used
+for this Niri setup. The current Niri configuration already starts Fcitx5 and
+sets the relevant Wayland environment.
 
 ## Package manifests
 
