@@ -1,0 +1,9 @@
+# Runtime output and generated Python files
+*.log
+__pycache__/
+*.py[cod]
+
+# Local secrets and machine-specific overrides
+.env
+.env.*
+*.local

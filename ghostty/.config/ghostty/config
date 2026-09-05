@@ -1,9 +1,9 @@
-theme = GitHub Dark
+theme = Catppuccin Mocha
 font-family = "Google Sans Code"
+font-family = "Jetendard"
 font-family = "JetBrains Mono"
 font-family = "SF Mono"
-font-family = "Noto Sans Mono CJK KR"
-font-size = 17
+font-size = 11
 window-decoration = false
 gtk-titlebar = false
-background-opacity = 0.75
+background-opacity = 0.95

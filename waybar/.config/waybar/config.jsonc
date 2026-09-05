@@ -5,7 +5,7 @@
     "height": 35,
     "spacing": 2,
 
-    "modules-left": ["hyprland/workspaces", "custom/dayleft", "custom/dday"],
+    "modules-left": ["hyprland/workspaces", "niri/workspaces", "custom/dayleft", "custom/dday"],
     "modules-center": ["clock"],
     "modules-right": ["network", "custom/separator", "pulseaudio", "custom/separator", "custom/polycat", "cpu", "custom/separator", "memory", "custom/separator", "battery", "tray"],
 
@@ -17,17 +17,14 @@
         },
         "disable-click": true,
         "persistent-workspaces": {
-            "1": [],
-            "2": [],
-            "3": [],
-            "4": [],
-            "5": [],
-            "6": [],
-            "7": [],
-            "8": [],
-            "9": [],
-            "10": []
+            "1": [], "2": [], "3": [], "4": [], "5": [],
+            "6": [], "7": [], "8": [], "9": [], "10": []
         }
+    },
+
+    "niri/workspaces": {
+        "format": "{index}",
+        "all-outputs": true
     },
 
     "custom/dayleft": {
@@ -39,7 +36,7 @@
     "custom/dday": {
         "format": "{}",
         "interval": 60,
-        "exec": "echo -n \"D-$(echo $(( ( $(date -d '2025-10-15' +%s) - $(date -d 'today' +%s)) / 86400 +1)))\""
+        "exec": "target=$(date -d '2026-02-23' +%s); now=$(date -d 'today 00:00:00' +%s); diff=$(( (now - target) / 86400 + 1 )); if [ $diff -gt 0 ]; then echo \"D+$diff\"; elif [ $diff -eq 0 ]; then echo \"D-Day\"; else echo \"D$diff\"; fi"
     },
 
     "battery": {
@@ -79,9 +76,9 @@
     },
 
     "custom/polycat": {
-    "exec": "/usr/bin/polycat",
-    "interval": 0,
-    "tail": "true"
+        "exec": "/usr/bin/polycat",
+        "interval": 0,
+        "tail": "true"
     },
 
     "tray": {
@@ -89,6 +86,3 @@
         "spacing": 8
     }
 }
-
-
-

@@ -12,7 +12,7 @@
 window#waybar {
     background-color: @background;
     color: @foreground;
-    font-family: "polycat", "SUITE", "JetBrainsMono Nerd Font", sans-serif;
+    font-family: "polycat", "Google Sans Flex 24px", "SUITE", "JetBrainsMono Nerd Font", sans-serif;
     font-size: 16px;
     font-weight: bold;
     transition-property: background-color;
