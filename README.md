@@ -285,7 +285,7 @@ you want; do not use `stow *`, because that would also try to treat package
 manifests and the laptop directory as Stow packages.
 
 ```sh
-stow bash dunst ghostty gtk htop niri nvim p10k profile tofi waybar xprofile zsh
+stow bash dunst ghostty gtk htop niri nvim p10k profile scripts tofi waybar xprofile zsh
 ```
 
 `stow` creates links from the package directories into `$HOME`. Existing
@@ -293,12 +293,24 @@ files can conflict. Inspect them first and move a personal file aside rather
 than overwriting it:
 
 ```sh
-stow -nv bash dunst ghostty gtk htop niri nvim p10k profile tofi waybar xprofile zsh
+stow -nv bash dunst ghostty gtk htop niri nvim p10k profile scripts tofi waybar xprofile zsh
 ```
 
 The repository does not contain `.gitconfig`, browser profiles, cookies,
 credentials, SSH keys, GPG keys, or application databases. Configure those
 locally and keep them out of Git.
+
+The old files under `~/sh` and `~/Applications` are not copied wholesale:
+
+- the aggressive battery setup duplicated the declarative TLP and Powertop
+  files and could overwrite system policy;
+- the HWP/Fcitx5 helper depends on a proprietary `/opt/hnc` installation;
+- `yta` depends on a missing companion MPRIS bridge;
+- the bmap ELF binary is a machine-specific external dependency.
+
+Use `scripts/.local/bin/enable-hibernate` only when hibernation is deliberately
+configured. It requires explicit swap-device and boot-entry arguments and
+modifies initramfs, the systemd-boot entry, and logind policy.
 
 ## Shared desktop configuration
 
@@ -318,11 +330,18 @@ tofi/       application launcher
 waybar/     status bar and scripts
 xprofile/   X session environment compatibility
 zsh/        Zsh configuration
+scripts/    Portable user scripts
 ```
 
 The Niri configuration starts Waybar, PipeWire-related desktop components,
 Fcitx5, dark GTK preferences, and other user applications. Review startup
 commands and output blocks on a new machine before starting Niri.
+
+The `scripts/` package installs portable user commands under
+`~/.local/bin`. The Niri bmap key binding uses `toggle-bmap`; its external
+`bmapctl-rust-linux-x86_64` controller is intentionally not committed because
+it is a machine-specific binary. Install that controller separately and make
+it available on `PATH`, or set `BMAP_COMMAND` to its path.
 
 ### Korean input with Fcitx5
 

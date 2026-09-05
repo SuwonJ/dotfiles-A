@@ -400,7 +400,7 @@ binds {
     Mod+Shift+Space      { spawn "playerctl" "play-pause"; }
     Mod+Shift+Comma      { spawn "playerctl" "previous"; }
     Mod+Shift+Period     { spawn "playerctl" "next"; }
-    Mod+shift+n {spawn "/home/suwonj/Applications/toggle_bmap.sh";}
+    Mod+shift+n { spawn "toggle-bmap"; }
 
     // Example brightness key mappings for brightnessctl.
     // You can use regular spawn with multiple arguments too (to avoid going through "sh"),

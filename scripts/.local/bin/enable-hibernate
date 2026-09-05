@@ -1,0 +1,40 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+swap_device="${1:?Usage: enable-hibernate <swap-device> <systemd-boot-entry>}"
+boot_entry="${2:?Usage: enable-hibernate <swap-device> <systemd-boot-entry>}"
+
+if [[ ! -b "$swap_device" ]]; then
+  echo "Swap device not found: $swap_device" >&2
+  exit 1
+fi
+if [[ ! -f "$boot_entry" ]]; then
+  echo "Boot entry not found: $boot_entry" >&2
+  exit 1
+fi
+
+swap_uuid="$(blkid -s UUID -o value "$swap_device")"
+if [[ -z "$swap_uuid" ]]; then
+  echo "Could not read UUID for $swap_device" >&2
+  exit 1
+fi
+
+if ! grep -Eq '^HOOKS=.*\<resume\>' /etc/mkinitcpio.conf; then
+  sed -i -E 's/\<block\>/& resume/' /etc/mkinitcpio.conf
+fi
+
+if grep -q 'resume=' "$boot_entry"; then
+  sed -i -E 's#resume=[^ ]+##g; s#  +# #g; s# $##' "$boot_entry"
+fi
+sed -i -E "s#^options .*#& resume=UUID=${swap_uuid}#" "$boot_entry"
+
+install -d -m 0755 /etc/systemd/logind.conf.d
+install -m 0644 /dev/stdin /etc/systemd/logind.conf.d/10-power-button-hibernate.conf <<'EOF'
+[Login]
+HandlePowerKey=hibernate
+EOF
+
+mkinitcpio -P
+systemctl kill -s HUP systemd-logind
+
+echo "Hibernate configuration enabled for swap UUID ${swap_uuid}."

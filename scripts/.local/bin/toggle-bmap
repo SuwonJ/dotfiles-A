@@ -1,0 +1,24 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+state_file="${XDG_RUNTIME_DIR:-/tmp}/bmap-mode"
+bmap_command="${BMAP_COMMAND:-bmapctl-rust-linux-x86_64}"
+
+if ! command -v "$bmap_command" >/dev/null 2>&1; then
+  echo "Missing bmap controller: $bmap_command" >&2
+  echo "Install it separately or set BMAP_COMMAND to its path." >&2
+  exit 1
+fi
+
+current_state="aware"
+if [[ -f "$state_file" ]]; then
+  current_state="$(<"$state_file")"
+fi
+
+if [[ "$current_state" == "cinema" ]]; then
+  "$bmap_command" aware
+  printf '%s\n' aware >"$state_file"
+else
+  "$bmap_command" cinema
+  printf '%s\n' cinema >"$state_file"
+fi
