@@ -1,0 +1,22 @@
+{
+    "layer": "background",
+    "position": "top",
+    "height": 0,
+    "spacing": 0,
+    "exclusive": false,
+    "passthrough": true,
+    "margin-top": 500,
+    "margin-left": 24,
+    "margin-right": 24,
+
+    "modules-center": ["custom/timetable"],
+
+    "custom/timetable": {
+        "format": "{}",
+        "exec": "~/.config/waybar/scripts/timetable_render.py",
+        "interval": 60,
+        "return-type": "json",
+        "escape": false,
+        "tooltip": true
+    }
+}

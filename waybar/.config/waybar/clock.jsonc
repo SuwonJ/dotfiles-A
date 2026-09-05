@@ -1,0 +1,22 @@
+{
+    "layer": "background",
+    "position": "top",
+    "height": 0,
+    "spacing": 0,
+    "exclusive": false,
+    "passthrough": true,
+    "margin-top": 180,
+    "margin-left": 0,
+    "margin-right": 0,
+
+    "modules-center": ["custom/dashboard"],
+
+    "custom/dashboard": {
+        "format": "{}",
+        "exec": "~/.config/waybar/scripts/desktop_dashboard.py",
+        "interval": 60,
+        "return-type": "json",
+        "escape": false,
+        "tooltip": true
+    }
+}
