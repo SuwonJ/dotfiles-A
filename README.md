@@ -140,8 +140,8 @@ machine. Review the `output` blocks before using it on another machine.
 ### Profile and graphics
 
 This repository currently uses Niri, Waybar, and Wayland utilities. Install a
-minimal profile and add the required packages below rather than assuming the
-old Hyprland notes are current. Intel integrated graphics normally use the
+minimal profile and add the required packages below; the older Hyprland notes
+are not the current restore path. Intel integrated graphics normally use the
 open-source driver. NVIDIA systems need the driver choice appropriate for
 their GPU and kernel.
 
@@ -150,11 +150,9 @@ terminal login followed by starting the compositor is also valid.
 
 ### Network and audio
 
-- Network backend: NetworkManager.
-- For a lower-power Wi-Fi setup, NetworkManager with the `iwd` backend may be
-  selected, but use only one network management approach.
-- Audio: PipeWire.
-- Bluetooth: enable it only if needed.
+- Network configuration: `NetworkManager` (the standard backend).
+- Audio: `PipeWire`.
+- Bluetooth: enable it if needed.
 
 ### User and security
 
@@ -162,18 +160,30 @@ Create the normal user account, set a root password if desired, and grant the
 user `sudo` access. Do not put passwords, tokens, SSH keys, or authentication
 databases in this repository.
 
-### Additional packages
+### Packages to select in archinstall
 
-At minimum, install the tools needed for the first boot and repository setup:
+Add these packages in `Additional packages` so the first boot already has a
+working network, audio, compositor, terminal, editor, and repository tools:
 
 ```text
-git sudo networkmanager pipewire pipewire-pulse wireplumber
-zsh neovim ghostty niri waybar
+base-devel git sudo stow networkmanager
+pipewire pipewire-pulse wireplumber
+zsh neovim ghostty niri waybar dunst
+fcitx5 fcitx5-gtk fcitx5-qt fcitx5-configtool fcitx5-hangul
+brightnessctl wl-clipboard xdg-desktop-portal xdg-desktop-portal-gtk
 ```
 
-The complete package manifests in this repository can be reviewed after the
-first boot. Do not blindly install every package from a manifest on a
-different-purpose machine.
+For the laptop profile, also select:
+
+```text
+tlp powertop keyd htop fontconfig
+```
+
+Add a browser, file manager, and applications such as `nautilus`, `firefox`,
+or `zed` according to the machine's purpose. Do not paste the entire package
+manifest into `archinstall`; those lists include optional applications,
+libraries, development dependencies, games, and packages from the source
+machines that are not required everywhere.
 
 ## First boot
 
@@ -183,25 +193,18 @@ After `archinstall` completes:
 reboot
 ```
 
-Log in, connect to the network, and update the system:
+Log in and update the system. NetworkManager was selected during
+`archinstall`, so no chroot workaround or manual replacement of the network
+backend is needed:
 
 ```sh
-sudo systemctl enable --now NetworkManager.service
 sudo pacman -Syu
 ```
 
-If NetworkManager was not installed in the target system, install and enable
-it from the console:
+Confirm the expected service if needed:
 
 ```sh
-sudo pacman -S --needed networkmanager
-sudo systemctl enable --now NetworkManager.service
-```
-
-Install common build tools and Git:
-
-```sh
-sudo pacman -S --needed base-devel git
+systemctl status NetworkManager.service
 ```
 
 ## Install package sets
@@ -233,7 +236,8 @@ set:
 sudo pacman -S --needed - < packages-pacman-laptop.txt
 ```
 
-Install `paru` before AUR packages:
+Install `paru` before installing AUR packages. This is the only package that
+must be bootstrapped from the AUR manually:
 
 ```sh
 git clone https://aur.archlinux.org/paru.git
@@ -253,6 +257,13 @@ For a laptop:
 
 ```sh
 paru -S --needed - < packages-aur-laptop.txt
+```
+
+`tofi` is also an AUR package in the current setup, so install it after
+`paru` if it was not included in the selected AUR manifest:
+
+```sh
+paru -S --needed tofi
 ```
 
 The AUR list may include `paru` and `paru-debug` because they were installed
@@ -275,12 +286,6 @@ manifests and the laptop directory as Stow packages.
 
 ```sh
 stow bash dunst ghostty gtk htop niri nvim p10k profile tofi waybar xprofile zsh
-```
-
-If `stow` is not installed:
-
-```sh
-sudo pacman -S --needed stow
 ```
 
 `stow` creates links from the package directories into `$HOME`. Existing
