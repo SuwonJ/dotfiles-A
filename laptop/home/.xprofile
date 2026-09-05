@@ -1,0 +1,3 @@
+if [ -f "$HOME/.config/im-framework/current.env" ]; then
+  . "$HOME/.config/im-framework/current.env"
+fi

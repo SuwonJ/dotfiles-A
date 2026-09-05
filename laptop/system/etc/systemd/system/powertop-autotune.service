@@ -1,0 +1,11 @@
+[Unit]
+Description=Apply Powertop runtime power-saving tunables once at boot
+After=multi-user.target tlp.service
+Wants=tlp.service
+
+[Service]
+Type=oneshot
+ExecStart=/usr/sbin/powertop --auto-tune
+
+[Install]
+WantedBy=multi-user.target
