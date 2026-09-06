@@ -134,8 +134,9 @@ Choose manual partitioning:
 - Format only the new Linux root and home partitions.
 - Do not format the Windows EFI partition.
 
-The repository's Niri configuration contains output names and modes from one
-machine. Review the `output` blocks before using it on another machine.
+The repository intentionally does not pin monitor output names or modes.
+Niri will detect connected outputs automatically. Add local `output` blocks
+only when a particular machine needs fixed placement or refresh rates.
 
 ### Profile and graphics
 
@@ -335,7 +336,11 @@ scripts/    Portable user scripts
 
 The Niri configuration starts Waybar, PipeWire-related desktop components,
 Fcitx5, dark GTK preferences, and other user applications. Review startup
-commands and output blocks on a new machine before starting Niri.
+commands before starting Niri.
+
+Laptop-only Niri behavior such as `disable-power-key-handling` and touchpad
+policy should be added locally after confirming the target hardware. It is
+not placed in the shared compositor file.
 
 The `scripts/` package installs portable user commands under
 `~/.local/bin`. The Niri bmap key binding uses `toggle-bmap`; its external
@@ -478,7 +483,7 @@ Start Niri from the login manager or a Wayland session. Check:
 
 - keyboard layout and Korean input;
 - terminal, launcher, Waybar, notifications, and audio;
-- external displays after reviewing Niri output names;
+- external displays and their automatically detected layout;
 - NetworkManager and Bluetooth if needed;
 - TLP status on a laptop;
 - keyd behavior on a laptop.

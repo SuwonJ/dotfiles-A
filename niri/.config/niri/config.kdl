@@ -84,18 +84,6 @@ input {
     // Setting max-scroll-amount="0%" makes it work only on windows already fully on screen.
     focus-follows-mouse
 }
-output "DP-2" {
-  mode "1920x1080@144.000"
-  scale 1
-  position x=0 y=0
-}
-
-output "eDP-1" {
-    mode "1920x1080@60.000"
-    scale 1
-    position x=0 y=1080
-}
-
 // Settings that influence how windows are positioned and sized.
 // Find more information on the wiki:
 // https://niri-wm.github.io/niri/Configuration:-Layout

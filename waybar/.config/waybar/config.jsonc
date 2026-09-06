@@ -28,7 +28,7 @@
 
     "battery": {
         "format": "<span color='#7d9e55'>BAT</span> {capacity}% ({time})",
-        "format-charging": "<span color='#f48fb1'>BAT</span> {capacity}%+ ({time})",
+        "format-charging": "<span color='#7d9e55'>BAT</span> {capacity}%+ ({time})",
         "format-full": "<span color='#7d9e55'>BAT</span> {capacity}%"
     },
 

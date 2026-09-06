@@ -10,9 +10,10 @@ POWERLEVEL9K_DISABLE_CONFIGURATION_WIZARD=true
 export PATH=$HOME/.local/bin:$PATH
 export PATH=$HOME/.npm-global/bin:$PATH
 alias gemini='npx @google/gemini-cli'
-export XMODIFIERS="@im=fcitx"
-export GTK_IM_MODULE=fcitx
-export QT_IM_MODULE=fcitx
+# Shared input method environment (managed by ~/.local/bin/im-switch).
+if [[ -f "$HOME/.config/im-framework/current.env" ]]; then
+  source "$HOME/.config/im-framework/current.env"
+fi
 export HISTFILE="$HOME/.zsh_history"
 setopt APPEND_HISTORY
 setopt INC_APPEND_HISTORY
@@ -38,3 +39,11 @@ else
 fi
 unset __conda_setup
 # <<< conda initialize <<<
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+source <(fzf --zsh)
+
+ytclip() {
+    mpv --hwdec=auto --ytdl-format="bestvideo[height<=2160]+bestaudio/best" "$(wl-paste)"
+}
