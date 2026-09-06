@@ -11,3 +11,7 @@ export PATH="$HOME/.npm-global/bin:$PATH"
 if command -v conda >/dev/null 2>&1; then
     eval "$(conda shell.bash hook)"
 fi
+
+
+# Added by Antigravity CLI installer
+export PATH="/home/suwonj/.local/bin:$PATH"

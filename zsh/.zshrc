@@ -47,3 +47,7 @@ source <(fzf --zsh)
 ytclip() {
     mpv --hwdec=auto --ytdl-format="bestvideo[height<=2160]+bestaudio/best" "$(wl-paste)"
 }
+
+
+# Added by Antigravity CLI installer
+export PATH="/home/suwonj/.local/bin:$PATH"

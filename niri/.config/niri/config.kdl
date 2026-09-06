@@ -22,6 +22,9 @@ spawn-at-startup "dbus-update-activation-environment --all"
 spawn-at-startup "gnome-keyring-daemon --start --components=secrets"
 spawn-at-startup "dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP"
 spawn-at-startup "niri-float-sticky -disable-auto-stick"
+spawn-at-startup "swaybg" "-i" "/home/suwonj/Pictures/wallpaper.jpg" "-m" "fill"
+spawn-at-startup "dbus-update-activation-environment" "--systemd" "WAYLAND_DISPLAY" "XDG_CURRENT_DESKTOP"
+spawn-at-startup "dunst"
 
 input {
     keyboard {

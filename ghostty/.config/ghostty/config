@@ -1,6 +1,8 @@
 theme = Catppuccin Mocha
+font-family = "Google Sans Code NF Medium"
 font-family = "Google Sans Code"
 font-family = "Jetendard"
+font-family = "Google Sans Code NF"
 font-family = "JetBrains Mono"
 font-family = "SF Mono"
 font-family = "Noto Sans Mono CJK KR"

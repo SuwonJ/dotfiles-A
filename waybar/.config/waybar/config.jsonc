@@ -1,8 +1,9 @@
 {
     "style": "./waybar_style.css",
-    "layer": "top",
+    "layer": "bottom",
     "position": "top",
-    "height": 35,
+    "height": 115,
+    "margin-bottom": -80,
     "spacing": 2,
 
     "modules-left": ["niri/workspaces", "custom/dayleft", "custom/dday"],
