@@ -163,28 +163,18 @@ databases in this repository.
 
 ### Packages to select in archinstall
 
-Add these packages in `Additional packages` so the first boot already has a
-working network, audio, compositor, terminal, editor, and repository tools:
+Use the contents of `packages-pacman-base.txt` in `Additional packages`. This
+set includes the network, audio, compositor, terminal, editor, input method,
+Stow, and the commands referenced by the shared configuration.
 
-```text
-base-devel git sudo stow networkmanager
-pipewire pipewire-pulse wireplumber
-zsh neovim ghostty niri waybar dunst
-fcitx5 fcitx5-gtk fcitx5-qt fcitx5-configtool fcitx5-hangul
-brightnessctl wl-clipboard xdg-desktop-portal xdg-desktop-portal-gtk
-```
+For a laptop, also add the contents of
+`packages-pacman-laptop-install.txt`. It adds TLP, Powertop, keyd, and
+fontconfig without installing the desktop-only package snapshot.
 
-For the laptop profile, also select:
-
-```text
-tlp powertop keyd htop fontconfig
-```
-
-Add a browser, file manager, and applications such as `nautilus`, `firefox`,
-or `zed` according to the machine's purpose. Do not paste the entire package
-manifest into `archinstall`; those lists include optional applications,
-libraries, development dependencies, games, and packages from the source
-machines that are not required everywhere.
+Add applications such as `nautilus`, `firefox`, or `zed` only when they are
+needed. The curated base list includes Firefox and Nautilus because they are
+part of the normal desktop workflow; remove them in `archinstall` if this is
+a minimal machine.
 
 ## First boot
 
@@ -210,31 +200,36 @@ systemctl status NetworkManager.service
 
 ## Install package sets
 
-The package manifests are snapshots from the source systems:
+The package manifests are divided into curated install lists and source
+system snapshots:
 
 | File | Meaning |
 | --- | --- |
-| `packages-pacman.txt` | Official Arch packages for the broader desktop setup |
-| `packages-aur.txt` | AUR/foreign packages for the broader desktop setup |
-| `packages-pacman-laptop.txt` | Official packages captured from the laptop |
-| `packages-aur-laptop.txt` | AUR/foreign packages captured from the laptop |
+| `packages-pacman-base.txt` | Curated official packages for a normal install |
+| `packages-pacman-laptop-install.txt` | Curated official laptop additions |
+| `packages-aur-desktop-install.txt` | Curated optional AUR packages |
+| `packages-aur-laptop-install.txt` | Curated laptop AUR additions |
+| `packages-pacman.txt` | Full official package snapshot for reference |
+| `packages-aur.txt` | Full AUR/foreign package snapshot for reference |
+| `packages-pacman-laptop.txt` | Full laptop official snapshot for reference |
+| `packages-aur-laptop.txt` | Full laptop AUR/foreign snapshot for reference |
 
-The lists are intentionally broad and include desktop and workload-specific
-software. Examples include games, OBS Studio, LibreOffice, TeX, VPN clients,
-development tools, and desktop applications. Review them and install a
-smaller set when building a different machine.
+The four `*-install.txt` files are the recommended starting point. The four
+larger lists are inventories captured with `pacman -Qqn` and `pacman -Qqm`;
+they include dependencies, games, development workloads, VPN clients,
+proprietary applications, and machine-specific software and should not be
+installed wholesale on a new machine.
 
 Official packages:
 
 ```sh
-sudo pacman -S --needed - < packages-pacman.txt
+sudo pacman -S --needed - < packages-pacman-base.txt
 ```
 
-For a laptop, use the laptop list instead or in addition to a reviewed common
-set:
+For a laptop:
 
 ```sh
-sudo pacman -S --needed - < packages-pacman-laptop.txt
+sudo pacman -S --needed - < packages-pacman-laptop-install.txt
 ```
 
 Install `paru` before installing AUR packages. This is the only package that
@@ -248,28 +243,21 @@ cd ..
 rm -rf paru
 ```
 
-Then install a reviewed AUR set:
+Then install the curated AUR set:
 
 ```sh
-paru -S --needed - < packages-aur.txt
+paru -S --needed - < packages-aur-desktop-install.txt
 ```
 
 For a laptop:
 
 ```sh
-paru -S --needed - < packages-aur-laptop.txt
+paru -S --needed - < packages-aur-laptop-install.txt
 ```
 
-`tofi` is also an AUR package in the current setup, so install it after
-`paru` if it was not included in the selected AUR manifest:
-
-```sh
-paru -S --needed tofi
-```
-
-The AUR list may include `paru` and `paru-debug` because they were installed
-on the source system. Do not reinstall `paru` from its own manifest before the
-bootstrap step is complete.
+The curated AUR lists include `paru` for reference, but bootstrap `paru`
+manually before using the rest of the list. The old AUR snapshot may contain
+`paru-debug`, libraries, and application-specific packages that are not needed.
 
 ## Clone and apply the repository
 
@@ -443,8 +431,8 @@ remapping service.
 
 The repository contains the current Niri-based desktop configuration. A
 desktop may omit laptop TLP, Powertop, and keyd files. Install desktop
-applications from the reviewed `packages-pacman.txt` and `packages-aur.txt`
-lists as needed.
+applications from the curated install lists, then consult the full snapshots
+only when a specific workload requires them.
 
 The package snapshot also contains legacy or alternative desktop software.
 This is intentional inventory, not a requirement to install every package.
