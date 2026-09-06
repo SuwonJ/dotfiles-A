@@ -65,7 +65,9 @@ select_packages() {
 install_official() {
   local -a selected=()
   while IFS= read -r -d '' package; do selected+=("$package"); done
-  ((${#selected[@]})) && sudo pacman -S --needed "${selected[@]}"
+  # 변경점: 빈 배열일 때 set -e로 인해 스크립트가 종료되는 것을 방지
+  ((${#selected[@]})) || return 0
+  sudo pacman -S --needed "${selected[@]}"
 }
 
 install_aur() {
@@ -140,8 +142,10 @@ stow_shared() {
     echo "Stow preview reported conflicts; no shared dotfiles were applied." >&2
     return 1
   }
-  read_yes_no "Apply the selected shared dotfiles now?" y &&
+  # 변경점: if문으로 감싸서 사용자가 n을 입력했을 때 스크립트가 죽지 않도록 방지
+  if read_yes_no "Apply the selected shared dotfiles now?" y; then
     (cd "$repo_dir" && stow "${packages[@]}")
+  fi
 }
 
 main() {
@@ -150,11 +154,23 @@ main() {
     echo "This will install packages and optionally restore dotfiles."
     read_yes_no "Install the required official packages?" y || return 0
     install_official < <(select_packages packages-pacman-required.txt choose)
-    read_yes_no "Install required AUR packages?" y &&
+    
+    # 변경점: 모든 단독 && 구문을 if문으로 교체
+    if read_yes_no "Install required AUR packages?" y; then
       install_aur < <(select_packages packages-aur-required.txt choose)
-    read_yes_no "Configure shared dotfiles with Stow?" y && stow_shared
-    if read_yes_no "Configure this machine as a laptop?" n; then laptop=true; fi
-    read_yes_no "Review and install optional packages?" n && optional=true
+    fi
+    
+    if read_yes_no "Configure shared dotfiles with Stow?" y; then 
+      stow_shared
+    fi
+    
+    if read_yes_no "Configure this machine as a laptop?" n; then 
+      laptop=true
+    fi
+    
+    if read_yes_no "Review and install optional packages?" n; then 
+      optional=true
+    fi
   else
     install_official < <(select_packages packages-pacman-required.txt all)
     install_aur < <(select_packages packages-aur-required.txt all)
@@ -168,17 +184,23 @@ main() {
   if [[ $laptop == true ]]; then
     install_official < <(select_packages packages-pacman-laptop-required.txt choose)
     if [[ "$noninteractive_laptop" == false ]]; then
-      read_yes_no "Restore laptop home dotfiles without overwriting existing files?" y &&
+      if read_yes_no "Restore laptop home dotfiles without overwriting existing files?" y; then
         restore_laptop_home
-      read_yes_no "Restore laptop system files (TLP, keyd, Powertop) without overwriting existing files?" y &&
+      fi
+      
+      if read_yes_no "Restore laptop system files (TLP, keyd, Powertop) without overwriting existing files?" y; then
         restore_laptop_system
-      read_yes_no "Enable TLP and keyd now?" y && {
+      fi
+      
+      if read_yes_no "Enable TLP and keyd now?" y; then
         sudo systemctl disable --now power-profiles-daemon.service 2>/dev/null || true
         sudo systemctl enable --now tlp.service
         sudo systemctl enable --now keyd.service
-      }
-      read_yes_no "Enable the optional Powertop autotune service?" n &&
+      fi
+      
+      if read_yes_no "Enable the optional Powertop autotune service?" n; then
         sudo systemctl enable --now powertop-autotune.service
+      fi
     fi
   fi
 }
