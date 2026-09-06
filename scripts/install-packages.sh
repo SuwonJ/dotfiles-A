@@ -137,14 +137,15 @@ stow_shared() {
     fi
   done
   ((${#packages[@]})) || return 0
-  echo "Previewing Stow changes (existing conflicts are not overwritten):"
-  (cd "$repo_dir" && stow --simulate --verbose "${packages[@]}") || {
-    echo "Stow preview reported conflicts; no shared dotfiles were applied." >&2
-    return 1
-  }
-  # 변경점: if문으로 감싸서 사용자가 n을 입력했을 때 스크립트가 죽지 않도록 방지
-  if read_yes_no "Apply the selected shared dotfiles now?" y; then
-    (cd "$repo_dir" && stow "${packages[@]}")
+
+  if read_yes_no "Apply the selected shared dotfiles now (force overwrite)?" y; then
+    (
+      cd "$repo_dir"
+      # 기존 파일을 흡수하며 심볼릭 링크 생성
+      stow --adopt "${packages[@]}"
+      # 흡수되어 바뀐 패키지 파일을 원래 git 커밋 상태로 복구 (저장소 내용으로 덮어쓰기 완료)
+      git restore "${packages[@]}"
+    )
   fi
 }
 
