@@ -81,7 +81,8 @@ install_official() {
   fi
   
   echo "Installing pacman packages: ${selected[*]}"
-  sudo pacman -S --needed "${selected[@]}"
+  # 변경점: pacman이 키보드 입력을 받을 수 있도록 </dev/tty 추가
+  sudo pacman -S --needed "${selected[@]}" </dev/tty
 }
 
 install_aur() {
@@ -98,13 +99,13 @@ install_aur() {
     build_dir="$(mktemp -d)"
     trap 'rm -rf "$build_dir"' EXIT
     git clone https://aur.archlinux.org/paru.git "$build_dir/paru"
-    (cd "$build_dir/paru" && makepkg -si)
+    (cd "$build_dir/paru" && makepkg -si </dev/tty) # makepkg도 입력이 필요할 수 있으므로 추가
   fi
 
   echo "Installing AUR packages: ${selected[*]}"
-  paru -S --needed "${selected[@]}"
+  # 변경점: paru가 키보드 입력을 받을 수 있도록 </dev/tty 추가
+  paru -S --needed "${selected[@]}" </dev/tty
 }
-
 restore_file_no_clobber() {
   local source="$1" target="$2"
   if [[ -e "$target" || -L "$target" ]]; then
