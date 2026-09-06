@@ -1,6 +1,6 @@
 {
     "style": "./waybar_style.css",
-    "layer": "top",
+    "layer": "bottom",
     "position": "top",
     "height": 215,
     "margin-bottom": -180,
