@@ -1,0 +1,6 @@
+firefox
+htop
+mpv
+nautilus
+pavucontrol
+yt-dlp

@@ -163,18 +163,17 @@ databases in this repository.
 
 ### Packages to select in archinstall
 
-Use the contents of `packages-pacman-base.txt` in `Additional packages`. This
-set includes the network, audio, compositor, terminal, editor, input method,
-Stow, and the commands referenced by the shared configuration.
+Use the contents of `packages-pacman-required.txt` in `Additional packages`.
+This set includes the network, audio, compositor, terminal, editor, input
+method, Stow, and commands referenced by the shared configuration.
 
 For a laptop, also add the contents of
-`packages-pacman-laptop-install.txt`. It adds TLP, Powertop, keyd, and
+`packages-pacman-laptop-required.txt`. It adds TLP, Powertop, keyd, and
 fontconfig without installing the desktop-only package snapshot.
 
-Add applications such as `nautilus`, `firefox`, or `zed` only when they are
-needed. The curated base list includes Firefox and Nautilus because they are
-part of the normal desktop workflow; remove them in `archinstall` if this is
-a minimal machine.
+Add `packages-pacman-optional.txt` only when applications such as Firefox,
+Nautilus, or MPV are wanted. This keeps the required profile limited to
+software referenced by the repository itself.
 
 ## First boot
 
@@ -205,59 +204,45 @@ system snapshots:
 
 | File | Meaning |
 | --- | --- |
-| `packages-pacman-base.txt` | Curated official packages for a normal install |
-| `packages-pacman-laptop-install.txt` | Curated official laptop additions |
-| `packages-aur-desktop-install.txt` | Curated optional AUR packages |
-| `packages-aur-laptop-install.txt` | Curated laptop AUR additions |
+| `packages-pacman-required.txt` | Official packages required by the repository |
+| `packages-pacman-laptop-required.txt` | Official laptop-only packages |
+| `packages-pacman-optional.txt` | Optional official applications |
+| `packages-aur-required.txt` | AUR packages required by the repository |
+| `packages-aur-optional.txt` | Optional AUR packages |
 | `packages-pacman.txt` | Full official package snapshot for reference |
 | `packages-aur.txt` | Full AUR/foreign package snapshot for reference |
 | `packages-pacman-laptop.txt` | Full laptop official snapshot for reference |
 | `packages-aur-laptop.txt` | Full laptop AUR/foreign snapshot for reference |
 
-The four `*-install.txt` files are the recommended starting point. The four
-larger lists are inventories captured with `pacman -Qqn` and `pacman -Qqm`;
+The five curated lists are the recommended starting point. The four larger
+lists are inventories captured with `pacman -Qqn` and `pacman -Qqm`;
 they include dependencies, games, development workloads, VPN clients,
 proprietary applications, and machine-specific software and should not be
 installed wholesale on a new machine.
 
-Official packages:
+The installer provides one interactive flow for packages and dotfiles. It
+asks about every package, lets you choose shared Stow packages, and optionally
+restores the laptop home/system files without overwriting files that already
+exist. It also enables TLP and keyd after asking for confirmation:
 
 ```sh
-sudo pacman -S --needed - < packages-pacman-base.txt
+./scripts/install-packages.sh
 ```
 
-For a laptop:
+For unattended package-profile use:
 
 ```sh
-sudo pacman -S --needed - < packages-pacman-laptop-install.txt
+./scripts/install-packages.sh --laptop
+./scripts/install-packages.sh --optional
+./scripts/install-packages.sh --laptop --optional
 ```
 
-Install `paru` before installing AUR packages. This is the only package that
-must be bootstrapped from the AUR manually:
-
-```sh
-git clone https://aur.archlinux.org/paru.git
-cd paru
-makepkg -si
-cd ..
-rm -rf paru
-```
-
-Then install the curated AUR set:
-
-```sh
-paru -S --needed - < packages-aur-desktop-install.txt
-```
-
-For a laptop:
-
-```sh
-paru -S --needed - < packages-aur-laptop-install.txt
-```
-
-The curated AUR lists include `paru` for reference, but bootstrap `paru`
-manually before using the rest of the list. The old AUR snapshot may contain
-`paru-debug`, libraries, and application-specific packages that are not needed.
+The script refuses to run as root and bootstraps `paru` when required. The
+snapshot lists are reference inventories only and are never installed by the
+script. Laptop restoration installs the declarative TLP drop-in,
+`powertop-autotune.service`, and keyd configuration only when each action is
+approved. `power-profiles-daemon` must remain disabled or masked when TLP is
+used.
 
 ## Clone and apply the repository
 

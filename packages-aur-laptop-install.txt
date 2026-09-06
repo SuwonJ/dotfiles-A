@@ -1,6 +1,0 @@
-niri-float-sticky
-paru
-polycat
-tofi
-ttf-google-sans-code-nf
-zsh-theme-powerlevel10k-git
