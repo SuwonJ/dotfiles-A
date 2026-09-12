@@ -1,76 +1,89 @@
-{
-    "style": "./waybar_style.css",
-    "layer": "bottom",
-    "position": "top",
-    "height": 215,
-    "margin-bottom": -180,
-    "spacing": 2,
-
-    "modules-left": ["niri/workspaces", "custom/dayleft", "custom/dday"],
-    "modules-center": ["clock"],
-    "modules-right": ["network", "custom/separator", "pulseaudio", "custom/separator", "custom/polycat", "cpu", "custom/separator", "memory", "custom/separator", "battery", "tray"],
-
-    "niri/workspaces": {
-        "format": "{index}",
-        "all-outputs": true
+[
+    {
+        "name": "bg-gradient",
+        "layer": "bottom",
+        "position": "top",
+        "height": 215,
+        "exclusive": false,
+        "margin-top": -36,
+        "modules-center": ["custom/empty"],
+        "custom/empty": {
+            "format": " "
+        }
     },
+    {
+        "name": "main-bar",
+        "layer": "top",
+        "position": "top",
+        "height": 36,
+        "spacing": 2,
 
-    "custom/dayleft": {
-        "format": "{}",
-        "interval": 5,
-        "exec": "now=$(date +%s); start=$(date -d \"$(date +%Y-%m-%d) 08:00:00\" +%s); end=$(date -d \"$(date +%Y-%m-%d) 23:59:59\" +%s); total=$((end - start)); left=$((end - now)); if (( now <= start )); then percent=100; elif (( now > end )); then percent=0; else percent=$(awk -v total=$total -v left=$left 'BEGIN {print (left/total)*100}'); fi; printf \"DayLeft: %.2f%%\n\" \"$percent\""
-    },
+        "modules-left": ["niri/workspaces", "custom/dayleft", "custom/dday"],
+        "modules-center": ["clock"],
+        "modules-right": ["network", "custom/separator", "pulseaudio", "custom/separator", "custom/polycat", "cpu", "custom/separator", "memory", "custom/separator", "battery", "tray"],
 
-    "custom/dday": {
-        "format": "{}",
-        "interval": 60,
-        "exec": "target=$(date -d '2026-02-23' +%s); now=$(date -d 'today 00:00:00' +%s); diff=$(( (now - target) / 86400 + 1 )); if [ $diff -gt 0 ]; then echo \"D+$diff\"; elif [ $diff -eq 0 ]; then echo \"D-Day\"; else echo \"D$diff\"; fi"
-    },
+        "niri/workspaces": {
+            "format": "{index}",
+            "all-outputs": true
+        },
 
-    "battery": {
-        "format": "<span color='#7d9e55'>BAT</span> {capacity}% ({time})",
-        "format-charging": "<span color='#7d9e55'>BAT</span> {capacity}%+ ({time})",
-        "format-full": "<span color='#7d9e55'>BAT</span> {capacity}%"
-    },
+        "custom/dayleft": {
+            "format": "{}",
+            "interval": 5,
+            "exec": "now=$(date +%s); start=$(date -d \"$(date +%Y-%m-%d) 08:00:00\" +%s); end=$(date -d \"$(date +%Y-%m-%d) 23:59:59\" +%s); total=$((end - start)); left=$((end - now)); if (( now <= start )); then percent=100; elif (( now > end )); then percent=0; else percent=$(awk -v total=$total -v left=$left 'BEGIN {print (left/total)*100}'); fi; printf \"DayLeft: %.2f%%\n\" \"$percent\""
+        },
 
-    "clock": {
-        "format": "{:%a %b %d • %H:%M}",
-        "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>"
-    },
+        "custom/dday": {
+            "format": "{}",
+            "interval": 60,
+            "exec": "target=$(date -d '2026-02-23' +%s); now=$(date -d 'today 00:00:00' +%s); diff=$(( (now - target) / 86400 + 1 )); if [ $diff -gt 0 ]; then echo \"D+$diff\"; elif [ $diff -eq 0 ]; then echo \"D-Day\"; else echo \"D$diff\"; fi"
+        },
 
-    "network": {
-        "interface": "wlan0",
-        "format-wifi": "{bandwidthDown}KB/s ↓ {bandwidthUp}KB/s ↑",
-        "format-ethernet": "{ipaddr}/{cidr} ",
-        "format-disconnected": "Offline"
-    },
+        "battery": {
+            "format": "<span color='#7d9e55'>BAT</span> {capacity}% ({time})",
+            "format-charging": "<span color='#7d9e55'>BAT</span> {capacity}%+ ({time})",
+            "format-full": "<span color='#7d9e55'>BAT</span> {capacity}%"
+        },
 
-    "pulseaudio": {
-        "format": "<span color='#7d9e55'>VOL</span> {volume}%",
-        "format-muted": "<span color='#7d9e55'>MUTE</span> 0%",
-        "on-click": "pavucontrol"
-    },
+        "clock": {
+            "format": "{:%a %b %d • %H:%M}",
+            "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>"
+        },
 
-    "cpu": {
-        "format": "{usage}%"
-    },
+        "network": {
+            "interface": "wlan0",
+            "format-wifi": "{bandwidthDown}KB/s ↓ {bandwidthUp}KB/s ↑",
+            "format-ethernet": "{ipaddr}/{cidr} ",
+            "format-disconnected": "Offline"
+        },
 
-    "memory": {
-        "format": "{used}G"
-    },
+        "pulseaudio": {
+            "format": "<span color='#7d9e55'>VOL</span> {volume}%",
+            "format-muted": "<span color='#7d9e55'>MUTE</span> 0%",
+            "on-click": "pavucontrol"
+        },
 
-    "custom/separator": {
-        "format": "|"
-    },
+        "cpu": {
+            "format": "{usage}%"
+        },
 
-    "custom/polycat": {
-        "exec": "/usr/bin/polycat",
-        "interval": 0,
-        "tail": "true"
-    },
+        "memory": {
+            "format": "{used}G"
+        },
 
-    "tray": {
-        "icon-size": 18,
-        "spacing": 8
+        "custom/separator": {
+            "format": "|"
+        },
+
+        "custom/polycat": {
+            "exec": "/usr/bin/polycat",
+            "interval": 0,
+            "tail": "true"
+        },
+
+        "tray": {
+            "icon-size": 18,
+            "spacing": 8
+        }
     }
-}
+]

@@ -47,6 +47,7 @@ source <(fzf --zsh)
 ytclip() {
     mpv --hwdec=auto --ytdl-format="bestvideo[height<=2160]+bestaudio/best" "$(wl-paste)"
 }
+export SAL_USE_VCLPLUGIN=gtk3
 
 
 # Added by Antigravity CLI installer

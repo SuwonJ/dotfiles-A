@@ -26,6 +26,11 @@ spawn-at-startup "swaybg" "-i" "/home/suwonj/Pictures/wallpaper.jpg" "-m" "fill"
 spawn-at-startup "dbus-update-activation-environment" "--systemd" "WAYLAND_DISPLAY" "XDG_CURRENT_DESKTOP"
 spawn-at-startup "dunst"
 
+environment {
+    SAL_USE_VCLPLUGIN "gtk3"
+}
+
+
 overview {
     backdrop-color "#00000000"
 }
