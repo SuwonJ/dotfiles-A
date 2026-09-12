@@ -259,7 +259,7 @@ you want; do not use `stow *`, because that would also try to treat package
 manifests and the laptop directory as Stow packages.
 
 ```sh
-stow bash dunst ghostty gtk htop niri nvim p10k profile scripts tofi waybar xprofile zsh
+stow bash dunst fuzzel ghostty gtk htop niri nvim p10k profile scripts tofi waybar xprofile zsh
 ```
 
 `stow` creates links from the package directories into `$HOME`. Existing
@@ -267,7 +267,7 @@ files can conflict. Inspect them first and move a personal file aside rather
 than overwriting it:
 
 ```sh
-stow -nv bash dunst ghostty gtk htop niri nvim p10k profile scripts tofi waybar xprofile zsh
+stow -nv bash dunst fuzzel ghostty gtk htop niri nvim p10k profile scripts tofi waybar xprofile zsh
 ```
 
 The repository does not contain `.gitconfig`, browser profiles, cookies,

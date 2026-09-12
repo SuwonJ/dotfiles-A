@@ -71,6 +71,7 @@ chntpw
 chromaprint
 cifs-utils
 clang
+cliphist
 cloudflared
 clucene
 cmake

@@ -1,5 +1,6 @@
 base-devel
 brightnessctl
+cliphist
 dunst
 fcitx5
 fcitx5-configtool

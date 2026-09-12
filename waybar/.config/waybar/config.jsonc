@@ -51,7 +51,6 @@
         },
 
         "network": {
-            "interface": "wlan0",
             "format-wifi": "{bandwidthDown}KB/s ↓ {bandwidthUp}KB/s ↑",
             "format-ethernet": "{ipaddr}/{cidr} ",
             "format-disconnected": "Offline"
